@@ -1,0 +1,62 @@
+﻿@using cloudscribe.Pagination.Models
+@model PagedResult<ExpenseViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["Controller"] = "Home";
+    ViewData["Action"] = "Expense";
+}
+
+<style>
+    .container {
+        padding: 1rem 0rem;
+    }
+
+    h4 {
+        margin: 1.5rem 0rem 0.5rem;
+    }
+</style>
+
+<div>
+    <partial name="_PaginationPartial" model="Model" view-data="ViewData" />
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-body">
+                @{
+                    <table id="userGrid" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cost</th>
+                                <th>Category</th>
+                                <th>Comment</th>
+                                <th>Create Time</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var expense in Model.Data)
+                            {
+                                <tr>
+                                    <th width="60px" scope="row">@(expense.Id)</th>
+                                    <td>@(expense.Cost)</td>
+                                    <td>@(expense.CategoryName)</td>
+                                    <td>@(expense.Comment)</td>
+                                    <td>@(expense.Date)</td>
+                                    <td width="120px">
+                                        <a asp-action="UpdateExpense" asp-controller="Home" asp-route-id="@(expense.Id)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                        <a asp-action="DeleteExpense" asp-controller="Home" asp-route-id="@(expense.Id)" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a class="btn btn-success" asp-controller="Home" asp-action="CreateExpense">Add new expense</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

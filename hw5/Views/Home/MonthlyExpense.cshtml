@@ -1,0 +1,35 @@
+﻿@model List<ExpenseViewModel>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-body">
+                @{
+                    <table id="userGrid" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cost</th>
+                                <th>Category</th>
+                                <th>Comment</th>
+                                <th>Create Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var expense in Model)
+                            {
+                                <tr>
+                                    <th width="60px" scope="row">@(expense.Id)</th>
+                                    <td>@(expense.Cost)</td>
+                                    <td>@(expense.CategoryName)</td>
+                                    <td>@(expense.Comment)</td>
+                                    <td>@(expense.Date)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>

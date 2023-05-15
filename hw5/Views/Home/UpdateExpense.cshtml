@@ -1,0 +1,13 @@
+﻿@using hw6.Data.Entities;
+@model NewExpenseViewModel
+@{
+    ViewData["Title"] = "Create Expense";
+    ViewData["Controller"] = "Home";
+    ViewData["Action"] = "UpdateExpense";
+}
+
+<form method="post" asp-action="UpdateExpense" asp-controller="Home">
+    <div>
+        <partial name="_ExpensePartial" model="Model" view-data="ViewData" />
+    </div>
+</form>

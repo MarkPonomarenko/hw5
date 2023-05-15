@@ -1,0 +1,20 @@
+﻿@using hw6.Data.Entities;
+@model NewExpenseViewModel
+@{
+    ViewData["Title"] = "Create Expense";
+    ViewData["Controller"] = "Home";
+    ViewData["Action"] = "CreateExpense";
+}
+
+@section Scripts {
+    <script>
+        function show() {
+            alert("Create at least one category before creating expense");
+        }
+    </script>
+}    
+<form method="post" asp-action="CreateExpense" asp-controller="Home">
+    <div>
+        <partial name="_ExpensePartial" model="Model" view-data="ViewData" />
+    </div>
+</form>
