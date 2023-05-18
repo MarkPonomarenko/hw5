@@ -1,0 +1,70 @@
+﻿﻿@using hw6.Data.Entities
+@using cloudscribe.Pagination.Models
+@model PagedResult<CategoryViewModel>
+@{
+    ViewData["Title"] = "Categories";
+    ViewData["Controller"] = "Home";
+    ViewData["Action"] = "Category";
+}
+
+<style>
+    .container {
+        padding: 1rem 0rem;
+    }
+
+    h4 {
+        margin: 1.5rem 0rem 0.5rem;
+    }
+</style>
+
+<div>
+    <partial name="_PaginationPartial" model="Model" view-data="ViewData" />
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-body">
+                @{
+                    <table id="userGrid" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Money Spent</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var category in Model.Data)
+                            {
+                                <tr>
+                                    <th width="60px" scope="row">@(category.Id)</th>
+                                    <td>@(category.Name)</td>
+                                    <td>@(category.TotalMoney)</td>
+                                    <td width="120px">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryUpdateModal"><i class="fas fa-edit"></i></button>
+                                        <a asp-action="DeleteCategory" asp-controller="Home" asp-route-id="@(category.Id)" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                                <form asp-action="UpdateCategory" asp-controller="Home" method="post" asp-route-id="@(category.Id)">
+                                    <div id="categoryUpdateModal" class="modal" tabindex="-1" role="dialog">
+                                        <partial name="_CategoryPartial" model="Model" view-data="ViewData" />
+                                    </div>
+                                </form>
+                            }
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#categoryCreateModal">Add new category</button>
+                    <form asp-action="CreateCategory" asp-controller="Home" method="post">
+                        <div id="categoryCreateModal" class="modal" tabindex="-1" role="dialog">
+                            <partial name="_CategoryPartial" model="Model" view-data="ViewData" />
+                        </div>
+                    </form>
+                    
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
